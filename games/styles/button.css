@@ -1,0 +1,100 @@
+
+  .btnred {
+
+    background-color: red;
+  
+    margin: 25px;
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 20%;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 0;
+    grid-row-end: 1;
+
+    cursor: pointer;
+
+    align-self: center;
+    justify-self: center;
+
+  }
+
+  .btngreen {
+
+    background-color: green;
+  
+    margin: 25px;
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 20%;
+
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 0;
+    grid-row-end: 1;
+
+    cursor: pointer;
+
+    align-self: center;
+    justify-self: center;
+
+
+  }
+
+  .btnyellow {
+
+    background-color: yellow;
+  
+    margin: 25px;
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 20%;
+
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    cursor: pointer;
+
+    align-self: center;
+    justify-self: center;
+
+
+  }
+
+  .btnblue {
+
+    background-color: blue;
+  
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 20%;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    cursor: pointer;
+
+    align-self: center;
+    justify-self: center;
+
+  }
+
+
+  .pressed {
+    box-shadow: 0 0 20px white;
+    background-color: grey;
+  }
+  
