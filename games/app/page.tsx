@@ -4,12 +4,30 @@ import Image from 'next/image'
 import Button from './button'
 import AudioPlayer from './audio';
 import Title from './title';
-
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 export default function Home() {
 
-  let level = 0;
+  const [titleText, setTitleText] = useState('Appuyez sur une touche pour commencer');
+  const [level, setLevel] = useState(0);
+  const [userPattern, setUserPattern] = useState([]);
+  const [keyPressed, setKeyPressed] = useState(null);
+  const [computerPattern, setComputerPattern] = useState([]);
+  const [firsttime, setFirstTime] = useState(true);
+
+  const nextSequence = () => {
+
+    console.log('Appel de la fonction NextSequence');
+    let randomBtn = buttonsData[Math.floor(Math.random() * 4)].className;
+  
+    // Utilisez une fonction pour mettre à jour l'état basé sur l'état actuel
+    setComputerPattern((prevComputerPattern) => [...prevComputerPattern, randomBtn]);
+
+    setTitleText(`Niveau ${level}`);
+
+  };
+
+ console.log(`Computer Pattern : ${computerPattern}`)
 
   const buttonsData = [
     { number: 1, className: 'btngreen', itemName: 'item1', soundfile: '/sounds/green.mp3'},
@@ -17,8 +35,6 @@ export default function Home() {
     { number: 3, className: 'btnyellow', itemName: 'item3', soundfile: '/sounds/yellow.mp3' },
     { number: 4, className: 'btnblue', itemName: 'item4', soundfile: '/sounds/blue.mp3'},
   ];
- 
-  let userPattern = [];
 
   const buttons = buttonsData.map(data => {
     return <Button 
@@ -29,19 +45,61 @@ export default function Home() {
     />; 
   });
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // La propriété event.key contient la touche enfoncée
+      setKeyPressed(event.key);
 
+      if (firsttime) { 
 
-  const [titleText, setTitleText] = useState('Appuyez sur une touche pour commencer');
+        console.log("Key pressed first time. Value : " + firsttime);
+
+        setFirstTime(false);
+
+        setTimeout(() => { 
+            nextSequence();
+        }, 300);
+
+       // userclick();
+
+    } else {
+
+      console.log('First time Faux ' + firsttime);
+    }
+
+    };
+
+    // Ajoutez un écouteur d'événement pour "keydown"
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Supprimer l'écouteur lorsque le composant est démonté
+    return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+        
+        };
+            
+  }, [firsttime]);
 
   const handleButtonClick = (buttonClassName) => {
     // Mettez à jour le texte du titre en fonction de la classe du bouton cliqué
 
-    setTitleText(`Bouton ${buttonClassName} cliqué. Level ${level}`);
+    if (!firsttime) {
 
+    nextSequence();
+  
+    setLevel(level + 1);
+    setTitleText(`Niveau ${level}`);
+  
+    // Utilisez une fonction pour mettre à jour l'état basé sur l'état actuel
+    setUserPattern((prevUserPattern) => [...prevUserPattern, buttonClassName]);
+
+    }
+    
   };
 
-  let title = <Title titletext = {titleText} />
+  console.log(`User Pattern : ${userPattern}`);
 
+  let title = <Title titletext = {titleText} />
 
   return (
     <main>
