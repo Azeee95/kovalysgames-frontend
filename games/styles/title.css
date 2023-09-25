@@ -1,0 +1,22 @@
+.level-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+  
+  }
+  
+
+@media screen and (max-width: 768px) {
+  
+    .level-title {
+      font-size: 2rem;
+      margin-top: 40px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+
+    .level-title {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+  }

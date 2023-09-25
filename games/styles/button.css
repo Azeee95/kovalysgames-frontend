@@ -10,11 +10,6 @@
     border: 10px solid black;
     border-radius: 20%;
 
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 0;
-    grid-row-end: 1;
-
     cursor: pointer;
 
     align-self: center;
@@ -32,11 +27,6 @@
     width: 200px;
     border: 10px solid black;
     border-radius: 20%;
-
-    grid-column-start: 0;
-    grid-column-end: 1;
-    grid-row-start: 0;
-    grid-row-end: 1;
 
     cursor: pointer;
 
@@ -57,11 +47,6 @@
     border: 10px solid black;
     border-radius: 20%;
 
-    grid-column-start: 0;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 2;
-
     cursor: pointer;
 
     align-self: center;
@@ -74,16 +59,12 @@
 
     background-color: blue;
   
+    margin: 25px;
     display: inline-block;
     height: 200px;
     width: 200px;
     border: 10px solid black;
     border-radius: 20%;
-
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
 
     cursor: pointer;
 
@@ -94,7 +75,29 @@
 
 
   .pressed {
-    box-shadow: 0 0 20px white;
-    background-color: grey;
+    box-shadow: 0 0 20px #530050;
+    background-color: #f8d7f7;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .btnred,
+    .btngreen,
+    .btnyellow,
+    .btnblue {
+      height: 200px;
+      width: 200px;
+      border-width: 5px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .btnred,
+    .btngreen,
+    .btnyellow,
+    .btnblue {
+      height: 130px;
+      width: 130px;
+      border-width: 3px;
+    }
   }
   

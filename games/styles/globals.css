@@ -4,41 +4,110 @@
 
 :root {
 
-  background-color: #011F3F;
+  background-color: whitesmoke;
   text-align: center;
 
 }
 
-.header {
+.headerlogo {
 
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows:  1fr;
+  gap: 20px;
+  align-items: center;
   justify-content: center;
   width: 100wh;
   height: 100px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  color: white;
 
 }
 
-.level-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  color: #FEF2BF;
+.logolongblanc {
+
+  width: 10rem;
+  justify-self: center;
+  align-self: center;
 
 }
 
-.container {
+.sinscrire {
+
+  justify-self: right;
+
+}
+
+.seconnecter  {
+
+  justify-self: left;
+
+}
+
+.btn-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows:  1fr 1fr;
-
-  width: 50%;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes égales */
+  grid-template-rows: repeat(2, auto); /* 2 lignes égales (ajustez "auto" selon le contenu) */
+  gap: 25px; /* Marge entre les éléments */
+  width: 40%;
   margin: auto;
 
 }
 
-
 .game-over {
   background-color: red;
   opacity: 0.8;
+}
+
+.textcolor1 {
+
+  color: #530060;
+
+}
+
+.textcolor2 {
+
+  color: #770D67;
+
+}
+
+.bgcolor1 {
+
+background-color: #530060;
+
+}
+
+.bgcolor2 {
+
+background-color: #770D67;
+
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    font-size: 20px;
+  } 
+
+  .btn-container {
+
+    margin-left: 15%;
+    margin-top: 10%;
+    gap: 0px;
+  
+  }
+  
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
+
+
+.btn-container {
+
+  margin-left : 10% ;
+  gap: 0px;
+
+}
+
 }
