@@ -9,25 +9,14 @@ import React, { useState, useEffect } from 'react';
 export default function Home() {
 
   const [titleText, setTitleText] = useState('Appuyez sur une touche pour commencer');
-  const [level, setLevel] = useState(0);
   const [userPattern, setUserPattern] = useState([]);
-  const [keyPressed, setKeyPressed] = useState(null);
+  // const [keyPressed, setKeyPressed] = useState(null);
   const [computerPattern, setComputerPattern] = useState([]);
   const [firsttime, setFirstTime] = useState(true);
 
-  const nextSequence = () => {
-
-    console.log('Appel de la fonction NextSequence');
-    let randomBtn = buttonsData[Math.floor(Math.random() * 4)].className;
-  
-    // Utilisez une fonction pour mettre à jour l'état basé sur l'état actuel
-    setComputerPattern((prevComputerPattern) => [...prevComputerPattern, randomBtn]);
-
-    setTitleText(`Niveau ${level}`);
-
-  };
-
- console.log(`Computer Pattern : ${computerPattern}`)
+  let level = 0;
+  let nbClick = 0;
+  let gameStatus = 'go';
 
   const buttonsData = [
     { number: 1, className: 'btngreen', itemName: 'item1', soundfile: '/sounds/green.mp3'},
@@ -36,19 +25,117 @@ export default function Home() {
     { number: 4, className: 'btnblue', itemName: 'item4', soundfile: '/sounds/blue.mp3'},
   ];
 
+  // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
+
+  const nextSequence = () => {
+
+    setTitleText('Niveau : ' + level);
+    let randomBtn = (buttonsData[Math.floor(Math.random() * 4)].className);
+
+    setComputerPattern([...computerPattern, randomBtn]);
+    // setUserPattern([]);
+
+    level++;
+
+  }
+
+  // Fonction pour démarrer le jeu
+
+  const clickedButtons = (name) => {
+
+    nbClick++;
+    console.log( "Nombre de clicks : " + nbClick);
+
+    setUserPattern([...userPattern, name]);
+
+    if (nbClick == computerPattern.length) {
+
+      checkAnswer();
+
+      if (checkAnswer() == "go") {
+            
+        setTimeout(function () { 
+            nextSequence();
+        }, 1000);
+
+        setUserPattern([]);
+        nbClick = 0;
+
+    } else {
+
+      console.log('Perdu');
+
+      setTimeout(function () { 
+        location.reload();
+    }, 1000);
+
+    }
+
+
+    } else {
+
+
+    }
+
+
+  }
+
+  console.log('Computer Pattern : ' + computerPattern);
+  console.log('User Pattern : ' + userPattern);
+
+  // Vérification de la réponse de l'utilisateur
+  
+  const checkAnswer = () => {
+
+    gameStatus = 'go';
+
+    for (var i = 0; i < computerPattern.length; i++) {
+
+  //  console.log("Game Pattern [" + i + "]: " + gamePattern[i]);
+  //  console.log("User Clicked Pattern [" + i +  "]: " + userClickedPattern[i]);
+
+    if (computerPattern[i] == userPattern[i]) {
+
+        console.log("[" + i + "] " + "+++++ Equal => " + " Game Status : " + gameStatus);    
+
+    } else { 
+
+        gameStatus = "nogo";
+        console.log("[" + i + "] " + "--- Non Equal => " + " Game Status : " + gameStatus);
+
+    }
+
+} return gameStatus;
+
+  }
+
+  if (computerPattern.length > 0) {
+
+    setTimeout(() => { 
+
+      setTitleText('Niveau : ' + computerPattern.length);
+
+      }, 300);
+
+  }
+
+
   const buttons = buttonsData.map(data => {
     return <Button 
     className= {data.className} 
     soundfile={data.soundfile}
-    onClick={() => handleButtonClick(data.className)} // Passer la fonction ici }
-    
+    clickedButtons = {clickedButtons}
+    firsttime = {firsttime}
+
     />; 
   });
+
+  // Démarrage du jeu quand le clavier est appuyé la première fois 
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       // La propriété event.key contient la touche enfoncée
-      setKeyPressed(event.key);
+      // setKeyPressed(event.key);
 
       if (firsttime) { 
 
@@ -57,14 +144,11 @@ export default function Home() {
         setFirstTime(false);
 
         setTimeout(() => { 
-            nextSequence();
+        
+        nextSequence();
+          
         }, 300);
 
-       // userclick();
-
-    } else {
-
-      console.log('First time Faux ' + firsttime);
     }
 
     };
@@ -79,25 +163,6 @@ export default function Home() {
         };
             
   }, [firsttime]);
-
-  const handleButtonClick = (buttonClassName) => {
-    // Mettez à jour le texte du titre en fonction de la classe du bouton cliqué
-
-    if (!firsttime) {
-
-    nextSequence();
-  
-    setLevel(level + 1);
-    setTitleText(`Niveau ${level}`);
-  
-    // Utilisez une fonction pour mettre à jour l'état basé sur l'état actuel
-    setUserPattern((prevUserPattern) => [...prevUserPattern, buttonClassName]);
-
-    }
-    
-  };
-
-  console.log(`User Pattern : ${userPattern}`);
 
   let title = <Title titletext = {titleText} />
 
