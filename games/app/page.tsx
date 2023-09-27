@@ -96,7 +96,7 @@ export default function Home() {
   console.log('User Pattern : ' + userPattern);
 
 
-  const buttons = buttonsData.map(data => {
+  const buttons = buttonsData.map((data, i) => {
 
     //const buttonClassName = `${data.className} ${choosenBtn === data.className ? 'pressed' : ''}`
 
@@ -106,7 +106,7 @@ export default function Home() {
     clickedButtons = {clickedButtons}
     firsttime = {firsttime}
     choosenBtn = {choosenBtn}
-    key = {data.number}
+    key = {i}
 
     />; 
   });
