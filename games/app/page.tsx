@@ -106,6 +106,7 @@ export default function Home() {
     clickedButtons = {clickedButtons}
     firsttime = {firsttime}
     choosenBtn = {choosenBtn}
+    key = {data.number}
 
     />; 
   });
