@@ -15,57 +15,97 @@ export default function Home() {
   const [firsttime, setFirstTime] = useState(true);
   const [gameStatus, setGameStatus] = useState(true)
 
-  const [nbClick, setNbClick] = useState(0);
-
-  let sequenceLenght = 5;
+  let level = 0;
+  let nbClick = 0;
 
   const buttonsData = [
-    { number: 1, className: 'btngreen', soundfile: '/sounds/green.mp3'},
-    { number: 2, className: 'btnred', soundfile: '/sounds/red.mp3'},
-    { number: 3, className: 'btnyellow', soundfile: '/sounds/yellow.mp3' },
-    { number: 4, className: 'btnblue', soundfile: '/sounds/blue.mp3'},
+    { number: 1, className: 'btngreen', itemName: 'item1', soundfile: '/sounds/green.mp3'},
+    { number: 2, className: 'btnred', itemName: 'item2', soundfile: '/sounds/red.mp3'},
+    { number: 3, className: 'btnyellow', itemName: 'item3', soundfile: '/sounds/yellow.mp3' },
+    { number: 4, className: 'btnblue', itemName: 'item4', soundfile: '/sounds/blue.mp3'},
   ];
 
   // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
 
   const nextSequence = () => {
 
+    setTitleText('Niveau : ' + level);
     let randomBtn = (buttonsData[Math.floor(Math.random() * 4)].className);
 
     setComputerPattern([...computerPattern, randomBtn]);
     // setUserPattern([]);
 
-    setTitleText('Niveau : ' + computerPattern.length);
-    setNbClick(0);
-    setUserPattern([]);
+    level++;
 
   }
-
+  
   // Fonction pour démarrer le jeu
-
-  console.log('Computer Pattern : ' + computerPattern);
 
   const clickedButtons = (name) => {
 
+    nbClick++;
+    console.log( "Nombre de clicks : " + nbClick);
+
     setUserPattern([...userPattern, name]);
-    setNbClick(nbClick + 1)
 
-    if (nbClick+1 == computerPattern.length) {
+    if (nbClick == computerPattern.length) {
 
-      setTimeout (() => {
+      if (checkAnswer()) {
+            
+        setTimeout(function () { 
+            nextSequence();
+        }, 1000);
 
-        nextSequence();
+        setUserPattern([]);
+        nbClick = 0;
 
-      }, 300 )
+    } else {
 
-    } 
+      console.log('Perdu');
 
+      setTimeout(function () { 
+        location.reload();
+    }, 1000);
+
+    }
    
   } 
 
-  console.log( "Nombre de clicks : " + nbClick);
+}
 
+  console.log('Computer Pattern : ' + computerPattern);
   console.log('User Pattern : ' + userPattern);
+
+  // Vérification de la réponse de l'utilisateur
+  
+  const checkAnswer = () => {
+
+    for (var i = 0; i < computerPattern.length; i++) {
+
+    if (computerPattern[i] == userPattern[i]) {
+
+        console.log("[" + i + "] " + "+++++ Equal => " + " Game Status : " + gameStatus);    
+
+    } else { 
+
+        setGameStatus(false);
+        console.log("[" + i + "] " + "--- Non Equal => " + " Game Status : " + gameStatus);
+
+    }
+
+} return gameStatus;
+
+  }
+
+  if (computerPattern.length > 0) {
+
+    setTimeout(() => { 
+
+      setTitleText('Niveau : ' + computerPattern.length);
+
+      }, 300);
+
+  }
 
 
   const buttons = buttonsData.map(data => {
@@ -101,7 +141,7 @@ export default function Home() {
 
     };
 
-    // Ajouter un écouteur d'événement pour "keydown"
+    // Ajoutez un écouteur d'événement pour "keydown"
     window.addEventListener('keydown', handleKeyDown);
 
     // Supprimer l'écouteur lorsque le composant est démonté
