@@ -148,17 +148,10 @@ export default function Home() {
 
   const bodyClass = `${gameOver ? 'game-over' : ''}`
 
+
   return (
 
     <main className={bodyClass} >
-
-      <head>
-
-      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400&family=Press+Start+2P&display=swap" rel="stylesheet"></link>
-
-      </head>
 
     <div className='headerlogo bgcolor1'>
 
