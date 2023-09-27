@@ -10,20 +10,18 @@ export default function Home() {
 
   const [titleText, setTitleText] = useState('Appuyez sur une touche pour commencer');
   const [userPattern, setUserPattern] = useState([]);
-  // const [keyPressed, setKeyPressed] = useState(null);
   const [computerPattern, setComputerPattern] = useState([]);
   const [firsttime, setFirstTime] = useState(true);
-  const [gameStatus, setGameStatus] = useState(true)
+  const [gameOver, setGameOver] = useState(false)
+  const [choosenBtn, setChoosenBtn] = useState('')
 
   const [nbClick, setNbClick] = useState(0);
 
-  let sequenceLenght = 5;
-
   const buttonsData = [
-    { number: 1, className: 'btngreen', soundfile: '/sounds/green.mp3'},
-    { number: 2, className: 'btnred', soundfile: '/sounds/red.mp3'},
-    { number: 3, className: 'btnyellow', soundfile: '/sounds/yellow.mp3' },
-    { number: 4, className: 'btnblue', soundfile: '/sounds/blue.mp3'},
+    { number: 1, className: 'btngreen', soundfile: '/sounds/btngreen.mp3'},
+    { number: 2, className: 'btnred', soundfile: '/sounds/btnred.mp3'},
+    { number: 3, className: 'btnyellow', soundfile: '/sounds/btnyellow.mp3' },
+    { number: 4, className: 'btnblue', soundfile: '/sounds/btnblue.mp3'},
   ];
 
   // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
@@ -38,8 +36,20 @@ export default function Home() {
     setTitleText('Niveau : ' + computerPattern.length);
     setNbClick(0);
     setUserPattern([]);
+    playSound(randomBtn);
+    setChoosenBtn(randomBtn);
+
+    setTimeout(() => {
+      setChoosenBtn('');
+      // Reste de votre code pour continuer la séquence
+    }, 300);
 
   }
+
+  const playSound = async (buttonClassName) => {
+    const audio = new Audio(`/sounds/${buttonClassName}.mp3`);
+    await audio.play();
+  };
 
   // Fonction pour démarrer le jeu
 
@@ -50,13 +60,31 @@ export default function Home() {
     setUserPattern([...userPattern, name]);
     setNbClick(nbClick + 1)
 
-    if (nbClick+1 == computerPattern.length) {
+    if (nbClick == ((computerPattern.length)-1)) {
 
       setTimeout (() => {
 
         nextSequence();
 
       }, 300 )
+
+    } else {
+
+      if (name !== computerPattern[nbClick]) {
+
+       setTitleText('Game over');
+       playSound('wrong')
+       setGameOver(true);
+       setComputerPattern([]);
+       setFirstTime(true);
+       
+       setTimeout(() => { 
+        
+        setGameOver(false);
+          
+        }, 500);
+
+      } 
 
     } 
 
@@ -69,11 +97,15 @@ export default function Home() {
 
 
   const buttons = buttonsData.map(data => {
+
+    //const buttonClassName = `${data.className} ${choosenBtn === data.className ? 'pressed' : ''}`
+
     return <Button 
     className= {data.className} 
     soundfile={data.soundfile}
     clickedButtons = {clickedButtons}
     firsttime = {firsttime}
+    choosenBtn = {choosenBtn}
 
     />; 
   });
@@ -114,8 +146,12 @@ export default function Home() {
 
   let title = <Title titletext = {titleText} />
 
+  const bodyClass = `${gameOver ? 'game-over' : ''}`
+
   return (
-    <main>
+
+    <main className={bodyClass} >
+
       <head>
 
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>

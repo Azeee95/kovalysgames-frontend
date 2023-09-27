@@ -66,11 +66,7 @@ export default function Home() {
        setComputerPattern([]);
        setFirstTime(true);
 
-      } else {
-
-        console.log('New sequence required');
-
-      }
+      } 
 
     } 
 
