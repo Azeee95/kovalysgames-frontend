@@ -1,6 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com");
 @import url("https://fonts.gstatic.com");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400&family=Press+Start+2P&display=swap");
+
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
 
 :root {
 
@@ -67,14 +76,45 @@
 .textcolor2 {
 
   color: #770D67;
+  
 
 }
 
 .bgcolor1 {
 
 background-color: #530060;
+color: white;
 
 }
+
+.btn1 {
+
+  background-color: #530060;
+  color: white;
+
+}
+
+.btn1:hover {
+  background-color: rgb(249, 249, 249);
+  border: #530060 solid 1px;
+  color: #530060;
+}
+
+.textzone1 {
+
+  background-color: white;
+
+}
+
+.textzone1:focus {
+
+  border: #530060 solid 1px;
+}
+
+input:focus {
+  border: #530060 solid 1px;
+}
+
 
 .bgcolor2 {
 

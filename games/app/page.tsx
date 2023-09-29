@@ -1,14 +1,19 @@
 "use client"
 
 import Image from 'next/image'
-import Button from './button'
-import AudioPlayer from './audio';
-import Title from './title';
+import Button from '../components/site/button'
+import AudioPlayer from '../components/site/audio';
+import Title from '../components/site/title';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link'
+import Head from 'next/head';
+import Navbar from '../components/site/navbar';
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+
 
 export default function Home() {
 
-  const [titleText, setTitleText] = useState('Appuyez sur une touche pour commencer');
+  const [titleText, setTitleText] = useState('Simon Game by Kovalys');
   const [userPattern, setUserPattern] = useState([]);
   const [computerPattern, setComputerPattern] = useState([]);
   const [firsttime, setFirstTime] = useState(true);
@@ -16,6 +21,9 @@ export default function Home() {
   const [choosenBtn, setChoosenBtn] = useState('')
 
   const [nbClick, setNbClick] = useState(0);
+
+
+
 
   const buttonsData = [
     { number: 1, className: 'btngreen', soundfile: '/sounds/btngreen.mp3'},
@@ -149,31 +157,61 @@ export default function Home() {
 
   const bodyClass = `${gameOver ? 'game-over' : ''}`
 
+  const features = [
+    {
+      name: 'Êtape 1 : ',
+      description:
+        'Appuyez sur une touche pour commencer le jeu.',
+      icon: CloudArrowUpIcon,
+    },
+    {
+      name: 'Êtape 2 : ',
+      description: "Mémorisez la séquence de l'ordinateur. Si le bouton rouge clignotte, vous devez chosir ce bouton. Au prochain tour, il faudra appuyer sur le premier bouton de l'ordinateur et le suivant.",
+      icon: LockClosedIcon,
+    },
+    {
+      name: 'Êtape 3',
+      description: "À chaque tour, reproduisez la séquence de l'ordinateur depuis le début du jeu. Si vous ratez la séquence, game over ! ",
+      icon: ServerIcon,
+    },
+  ]
 
   return (
 
     <main className={bodyClass} >
 
-    <div className='headerlogo bgcolor1'>
+    <Navbar />
+    
+    <div className="overflow-hidden bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="lg:pr-8 lg:pt-4">
+            <div className="lg:max-w-lg">
+              
+              {title}
 
-      <img src = './logolongblanc.png' className='logolongblanc' />
+              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                {features.map((feature) => (
+                  <div key={feature.name} className="relative pl-9">
+                    <dt className="inline font-semibold text-gray-900">
+                      <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true" />
+                      {feature.name}
+                    </dt>{' '}
+                    <dd className="inline">{feature.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
 
-      <p className='seconnecter'> Comment jouer ? </p>
-      <p className='sinscrire'> S'inscrire </p>
-      <p className='seconnecter'> Se connecter  </p>
+          <div className={"btn-container"}>
 
-    </div>
+          {buttons}
 
-      <header className={'header'} >
-
-      {title}
-
-      </header>
-
-    <div className={"btn-container"}>
-
-    {buttons}
-
+          </div>
+          
+        </div>
+      </div>
     </div>
 
     </main>
