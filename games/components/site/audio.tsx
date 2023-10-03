@@ -5,7 +5,7 @@ const AudioPlayer = ({ audioSrc, audioRef }) => {
     if (audioSrc) {
       audioRef.current.src = audioSrc;
     }
-  }, [audioSrc]);
+  }, [audioSrc, audioRef]);
 
   return (
     <div>

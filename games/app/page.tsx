@@ -277,7 +277,7 @@ export default function Home() {
         {
           SetSignup(true);
         
-        }}> <a href = '#'> S'inscrire </a> </span> </p>
+        }}> <a href = '#'> S&apos;inscrire </a> </span> </p>
 
     )}
     

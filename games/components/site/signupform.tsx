@@ -125,7 +125,7 @@ console.log(user);
                         className="w-full text-center py-3 rounded my-1 btn1"
                         onClick={(e) => handleSignup()}
 
-                    >S'inscrire</button>
+                    >S&apos;inscrire</button>
 
                     <div className="text-center text-sm text-grey-dark mt-4">
                         Le respect de votre vie privée est notre priorité. Consultez notre <span><a className="no-underline border-b border-grey-dark text-grey-dark" href="#">
