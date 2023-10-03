@@ -7,13 +7,14 @@ import { logIn, logOut } from "@/redux/features/auth-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Navbar from "@/components/site/navbar";
-import Loginform from "@/components/site/loginform";
+import Loginform from "@/components/site/signinform";
+import Footer from "@/components/site/footer";
 
 export default function Login() {
 
   const [username, setUsername] = useState('');
 
-  const dispatch = useDispatch<AppDispatch>();
+  //const dispatch = useDispatch<AppDispatch>();
 
   const onClickLogin = () => {
 
@@ -34,7 +35,9 @@ export default function Login() {
         <Navbar />
 
         <Loginform />
-        
+
+        <Footer />
+
       </main>
     )
   }

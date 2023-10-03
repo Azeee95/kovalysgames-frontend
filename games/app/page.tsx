@@ -9,6 +9,20 @@ import Link from 'next/link'
 import Head from 'next/head';
 import Navbar from '../components/site/navbar';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import Footer from '@/components/site/footer';
+
+// Import Kovalys Connect components
+import Login from '@/app/Connexion/page'
+import Register from './Inscription/page';
+import Signupform from '@/components/site/signupform';
+import Signinform from '@/components/site/signinform';
+
+// Import Redux components 
+
+import { useAppSelector } from '@/redux/store'
+import { logIn, logOut } from "@/redux/features/auth-slice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 
 
 export default function Home() {
@@ -22,15 +36,34 @@ export default function Home() {
 
   const [nbClick, setNbClick] = useState(0);
 
-
-
-
   const buttonsData = [
     { number: 1, className: 'btngreen', soundfile: '/sounds/btngreen.mp3'},
     { number: 2, className: 'btnred', soundfile: '/sounds/btnred.mp3'},
     { number: 3, className: 'btnyellow', soundfile: '/sounds/btnyellow.mp3' },
     { number: 4, className: 'btnblue', soundfile: '/sounds/btnblue.mp3'},
   ];
+
+  // Initialisation des fonctions Redux
+
+  //const [username, setUsername] = useState('');
+
+  const username = useAppSelector((state) => state.authReducer.value.username)
+  const isAuth = useAppSelector((state) => state.authReducer.value.isAuth)
+  const [signup, SetSignup] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onClickLogin = () => {
+
+    dispatch(logIn(username));
+
+  }
+
+  const onClickLogout = () => {
+
+    dispatch(logOut());
+
+  }
 
   // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
 
@@ -182,6 +215,14 @@ export default function Home() {
 
     <Navbar />
     
+
+    {/* Page principale pour le jeu - Apparaît uniquement si l'utilisateur est authentifié*/}
+
+    {((isAuth == true) && 
+
+    <div>
+
+  
     <div className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -213,6 +254,57 @@ export default function Home() {
         </div>
       </div>
     </div>
+
+    </div>
+
+    )}
+
+    {/*  Partie Formulaire Sign in*/}
+
+    {(((isAuth == false) && (signup == false)) && 
+
+    <div>
+      
+    <Signinform />
+    
+    </div>
+
+    )}
+    
+    {(((isAuth == false) && (signup == false)) && 
+
+    <p className='textebasformulaire'> Pas encore de compte ? <span onClick={(e) => 
+        {
+          SetSignup(true);
+        
+        }}> <a href = '#'> S'inscrire </a> </span> </p>
+
+    )}
+    
+    {/* Partie Sign up form */}
+
+    {((signup == true) && 
+
+    <div>
+
+    <Signupform />
+
+    </div>
+
+    )}
+
+    {((signup == true) && 
+
+      <p className='textebasformulaire'> Déjà inscrit ? <span onClick={(e) => 
+        {
+          SetSignup(false);
+        
+        }}> <a href='#'> Se connecter ! </a> </span> </p>
+
+    )}
+
+
+    <Footer />
 
     </main>
 

@@ -151,3 +151,24 @@ background-color: #770D67;
 }
 
 }
+
+
+.error {
+
+  color: red;
+
+}
+
+.textebasformulaire {
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
+
+.forminput {
+
+  width: 20rem;
+  height: 3rem;
+
+}

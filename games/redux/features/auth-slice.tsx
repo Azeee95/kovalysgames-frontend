@@ -24,6 +24,7 @@ const initialState = {
         isModerator: false,
 
     } as AuthState,
+
 } as InitialState
 
 export const auth = createSlice({

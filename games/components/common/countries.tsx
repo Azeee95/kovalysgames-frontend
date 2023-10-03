@@ -7,6 +7,7 @@ export default function CountrySelect() {
   return (
     <Autocomplete
       id="country-select-demo"
+      className="block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform"
       sx={{ width: 300 }}
       options={countries}
       autoHighlight

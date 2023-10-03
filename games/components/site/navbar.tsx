@@ -3,18 +3,23 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import Image from 'next/image'
-import Login from '@/app/Connexion/page'
-import { useAppSelector } from '@/redux/store'
 import { useState } from "react";
+
+// Import Kovalys Connect components
+import Login from '@/app/Connexion/page'
+
+// Import Redux components 
+
+import { useAppSelector } from '@/redux/store'
 import { logIn, logOut } from "@/redux/features/auth-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 
+// Navigation Menu 
 
 const navigation = [
-  { name: 'Accueil', href: '/', current: false },
-  { name: 'Inscription', href: 'Inscription', current: true },
-  { name: 'Connexion', href: './Connexion', current: false },
+  { name: 'Accueil', href: '/', current: true },
+
 ]
 
 function classNames(...classes) {
@@ -24,6 +29,7 @@ function classNames(...classes) {
 export default function Navbar() {
 
   const username = useAppSelector((state) => state.authReducer.value.username)
+  const isAuth = useAppSelector((state) => state.authReducer.value.isAuth)
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -92,6 +98,9 @@ export default function Navbar() {
         </a>)}
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                
+              {((username !== '') && 
+
                 <button
                   type="button"
                   className="relative rounded-full p-1 bgcolor1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
@@ -100,8 +109,12 @@ export default function Navbar() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
+                )}
+                
                 {/* Profile dropdown */}
+
+                {((username !== '') && 
+
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bgcolor1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
@@ -157,7 +170,11 @@ export default function Navbar() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                )}
+                
               </div>
+
+              
             </div>
           </div>
 
