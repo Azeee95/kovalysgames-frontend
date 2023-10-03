@@ -5,12 +5,16 @@ import AudioPlayer from './audio';
 
 export default function Button(props: any) {
 
- const audioRef = useRef<null>(null)
+ // const audioRef = useRef<null>(null)
+
+ const audioRef = useRef <HTMLAudioElement>(null);
   
  const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
+
     if (props.choosenBtn === props.className) {
+      
       setIsPressed(true);
 
       setTimeout(() => {
@@ -22,7 +26,7 @@ export default function Button(props: any) {
   
   const handleClick = () => {
 
-    if (!props.firsttime) {
+    if (!props.firsttime && audioRef.current !== null) {
 
       audioRef.current.play();
       setIsPressed(true);
