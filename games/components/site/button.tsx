@@ -3,9 +3,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import AudioPlayer from './audio';
 
-export default function Button(props) {
-  const audioRef = useRef(null);
-  const [isPressed, setIsPressed] = useState(false);
+export default function Button(props: any) {
+
+ const audioRef = useRef<null>(null)
+  
+ const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
     if (props.choosenBtn === props.className) {

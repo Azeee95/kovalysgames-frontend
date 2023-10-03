@@ -28,8 +28,12 @@ import { AppDispatch } from "@/redux/store";
 export default function Home() {
 
   const [titleText, setTitleText] = useState('Simon Game by Kovalys');
-  const [userPattern, setUserPattern] = useState([]);
-  const [computerPattern, setComputerPattern] = useState([]);
+  //  const [userPattern, setUserPattern] = useState([]);
+  // const [computerPattern, setComputerPattern] = useState([]);
+
+  const [userPattern, setUserPattern] =  useState<any[]>([]);
+  const [computerPattern, setComputerPattern] = useState<any[]>([]);
+
   const [firsttime, setFirstTime] = useState(true);
   const [gameOver, setGameOver] = useState(false)
   const [choosenBtn, setChoosenBtn] = useState('')
@@ -50,6 +54,7 @@ export default function Home() {
   const username = useAppSelector((state) => state.authReducer.value.username)
   const isAuth = useAppSelector((state) => state.authReducer.value.isAuth)
   const [signup, SetSignup] = useState(false);
+
 
   // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
 
@@ -73,7 +78,7 @@ export default function Home() {
 
   }
 
-  const playSound = async (buttonClassName) => {
+  const playSound = async (buttonClassName: any) => {
     const audio = new Audio(`/sounds/${buttonClassName}.mp3`);
     await audio.play();
   };
@@ -82,7 +87,7 @@ export default function Home() {
 
   console.log('Computer Pattern : ' + computerPattern);
 
-  const clickedButtons = (name) => {
+  const clickedButtons = (name: any) => {
 
     setUserPattern([...userPattern, name]);
     setNbClick(nbClick + 1)
@@ -141,7 +146,7 @@ export default function Home() {
   // Démarrage du jeu quand le clavier est appuyé la première fois 
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: any) => {
       // La propriété event.key contient la touche enfoncée
       // setKeyPressed(event.key);
 
