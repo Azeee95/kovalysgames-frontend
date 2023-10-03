@@ -119,11 +119,14 @@ export default function Navbar() {
                     <Menu.Button className="relative flex rounded-full bgcolor1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+
+                      <Image 
+                      className="h-8 w-8 rounded-full"
+                      src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' 
+                      alt = 'Image' 
+                      width={100} 
+                      height={100} />
+
                     </Menu.Button>
                   </div>
                   <Transition
