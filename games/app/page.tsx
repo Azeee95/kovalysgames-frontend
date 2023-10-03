@@ -51,20 +51,6 @@ export default function Home() {
   const isAuth = useAppSelector((state) => state.authReducer.value.isAuth)
   const [signup, SetSignup] = useState(false);
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const onClickLogin = () => {
-
-   dispatch(logIn(username));
-
-  }
-
-  const onClickLogout = () => {
-
-   dispatch(logOut());
-
-  }
-
   // Fonction NextSequence pour identifier le bouton sur lequel l'ordinateur clique
 
   const nextSequence = () => {
