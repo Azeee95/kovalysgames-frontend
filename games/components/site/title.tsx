@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import AudioPlayer from './audio';
 
 
-export default function Title(props) {
+export default function Title(props: any) {
     
     
     return (
