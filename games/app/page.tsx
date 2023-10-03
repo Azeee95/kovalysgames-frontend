@@ -47,6 +47,8 @@ export default function Home() {
     { number: 4, className: 'btnblue', soundfile: '/sounds/btnblue.mp3'},
   ];
 
+console.log(process.env.backendserver);
+
   // Initialisation des fonctions Redux
 
   //const [username, setUsername] = useState('');
