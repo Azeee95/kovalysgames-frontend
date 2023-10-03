@@ -9,8 +9,8 @@ type InitialState = {
 type AuthState = {
 
     isAuth: boolean;
-    username: String;
-    uid: String;
+    username: string;
+    uid: string;
     isModerator: boolean;
 }
 
