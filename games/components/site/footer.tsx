@@ -69,7 +69,7 @@ export default function Footer() {
               <div className="rounded-md bgcolor1 p-2 ring-1 ring-white/10">
                 <HandRaisedIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
-              <dt className="mt-4 font-semibold text-white">S'inscrire</dt>
+              <dt className="mt-4 font-semibold text-white">S&apos;inscrire</dt>
               <dd className="mt-2 leading-7 text-white">
                 Pas encore de compte ? Inscrivez-vous et montrez au monde vos capacité de mémorisation.
               </dd>

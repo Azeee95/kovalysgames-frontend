@@ -56,7 +56,7 @@ console.log(user);
             </a>
 
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 className="mb-8 text-3xl text-center">S'inscrire</h1>
+                    <h1 className="mb-8 text-3xl text-center">S&apos;inscrire</h1>
                     <input 
                         type="text"
                         className="block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform"
