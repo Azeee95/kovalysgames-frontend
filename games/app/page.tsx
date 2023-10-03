@@ -55,13 +55,13 @@ export default function Home() {
 
   const onClickLogin = () => {
 
-    dispatch(logIn(username));
+   // dispatch(logIn(username));
 
   }
 
   const onClickLogout = () => {
 
-    dispatch(logOut());
+   // dispatch(logOut());
 
   }
 
