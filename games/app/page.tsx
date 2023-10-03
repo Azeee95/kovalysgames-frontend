@@ -183,7 +183,9 @@ export default function Home() {
           window.removeEventListener('keydown', handleKeyDown);
         
         };
-            
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [firsttime]);
 
   let title = <Title titletext = {titleText} />
