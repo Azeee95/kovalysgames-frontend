@@ -184,7 +184,7 @@ export default function Home() {
         
         };
             
-  }, [firsttime]);
+  }, [firsttime, nextSequence]);
 
   let title = <Title titletext = {titleText} />
 
