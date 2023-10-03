@@ -14,7 +14,7 @@ export default function Login() {
 
   const [username, setUsername] = useState('');
 
-  //const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onClickLogin = () => {
 
