@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Navbar from './navbar';
+import countries from '../common/countries.json';
 
 export default function Signupform (props: any) {
 
