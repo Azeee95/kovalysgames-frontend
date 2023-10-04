@@ -32,7 +32,13 @@ export default function Signinform () {
 
             const result = await fetch(`${process.env.backendserver}/users/signin`, {
                 method : 'POST', 
-                headers : {'Content-Type':'application/json'}, 
+                headers : {
+
+                    'Content-Type':'application/json',
+                    'origin' : 'https://www.kovalys-partners.com'
+
+                }, 
+                
                 body : JSON.stringify(user)
             })
 

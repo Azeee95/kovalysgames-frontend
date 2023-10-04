@@ -18,8 +18,9 @@ const nextConfig = {
       },
 
       env: {
-        backendserver: 'https://kovalysgames-backend.vercel.app',
         
+        backendserver: 'https://kovalysgames-backend.vercel.app',
+
       },
 }
 

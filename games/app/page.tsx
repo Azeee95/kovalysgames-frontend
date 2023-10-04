@@ -47,8 +47,6 @@ export default function Home() {
     { number: 4, className: 'btnblue', soundfile: '/sounds/btnblue.mp3'},
   ];
 
-console.log(process.env.backendserver);
-
   // Initialisation des fonctions Redux
 
   //const [username, setUsername] = useState('');
@@ -125,11 +123,6 @@ console.log(process.env.backendserver);
    
   } 
 
-  console.log( "Nombre de clicks : " + nbClick);
-
-  console.log('User Pattern : ' + userPattern);
-
-
   const buttons = buttonsData.map((data, i) => {
 
     //const buttonClassName = `${data.className} ${choosenBtn === data.className ? 'pressed' : ''}`
@@ -153,8 +146,6 @@ console.log(process.env.backendserver);
       // setKeyPressed(event.key);
 
       if (firsttime) { 
-
-        console.log("Key pressed first time. Value : " + firsttime);
 
         setFirstTime(false);
 
