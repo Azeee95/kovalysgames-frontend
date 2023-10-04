@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Navbar from './navbar';
 import countries from '../common/countries.json';
+import Select from 'react-select'
 
 export default function Signupform (props: any) {
 
@@ -16,37 +17,48 @@ const [firstname, setFirstname] = useState('');
 const [lastname, setLastname] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-const [country, setCountry] = useState(countries[71].iso2);
-const [city, setCity] = useState(countries[71].cities[8264]);
+const [country, setCountry] = useState('');
+const [city, setCity] = useState('')
 const [phonenumber, setPhonenumber] = useState('');
+
+const cityOptions = [{}];
 
 const handleCountrySelect = (e: any) => {
 
-    setCountry(e.target.value);
+    console.log(e);
+
+   const selectedCountry = countries.filter((f) => f.iso2 == e.value)
+   let cities = selectedCountry[0].cities;
+
+    cities.map((item) => {
+
+        if (item !== '') {
+    
+            cityOptions.push({value: item, label: item});
+    
+        }
+    
+    })
+
+    // setCountry(e.value);
 
 }
 
-const cityData = countries.filter((f) => f.iso2 == country)
+const handleCitySelect = (e: any) => {
 
-/*
-const handleSignup = () => {
-
-const user = {
-
-firstname: firstname,
-lastname: lastname,
-email: email,
-password: password,
-country: country,
-city: city,
-phonenumber: phonenumber
+console.log(e)
+// setCity(e.value);
 
 }
 
-console.log(user);
+const countryOptions = [{}];
 
-} 
-*/
+countries.map((item) => {
+
+    countryOptions.push({value: item.iso2, label: item.name})
+
+})
+
 
   return (
     <main>
@@ -105,22 +117,15 @@ console.log(user);
                         required/>
 
                     <div> 
-                    <select defaultValue = {country} onChange={(e) => handleCountrySelect(e)} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'>
-                        {countries.map((option, key) => (
-                        <option key = {key} value={option.iso2}>{option.name}</option>
-                        ))}
+                    
+                    <Select options={countryOptions} onChange={(e) => handleCountrySelect(e)} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'/> 
 
-                    </select>
                     </div>
 
                     <div> 
-                    <select defaultValue = {city} onChange={(e) => setCity(e.target.value)} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'>
 
-                       {cityData[0].cities.map((option, key) => (
-                        <option key = {key} value={option}>{option}</option>
-                        ))}
+                    <Select onChange={(e) => handleCitySelect(e)} options={cityOptions} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'/>
 
-                    </select>
                     </div>
 
                     <input 
