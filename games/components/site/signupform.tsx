@@ -16,10 +16,19 @@ const [firstname, setFirstname] = useState('');
 const [lastname, setLastname] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-const [country, setCountry] = useState('');
-const [city, setCity] = useState('');
+const [country, setCountry] = useState(countries[71].iso2);
+const [city, setCity] = useState(countries[71].cities[8264]);
 const [phonenumber, setPhonenumber] = useState('');
 
+const handleCountrySelect = (e: any) => {
+
+    setCountry(e.target.value);
+
+}
+
+const cityData = countries.filter((f) => f.iso2 == country)
+
+/*
 const handleSignup = () => {
 
 const user = {
@@ -37,6 +46,8 @@ phonenumber: phonenumber
 console.log(user);
 
 } 
+*/
+
   return (
     <main>
 
@@ -93,23 +104,24 @@ console.log(user);
                         value={password}
                         required/>
 
-                    <input 
-                        type="text"
-                        className="block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform"
-                        name="country"
-                        placeholder="Pays" 
-                        onChange={(e) => setCountry(e.target.value)}
-                        value={country}
-                        required/>
+                    <div> 
+                    <select defaultValue = {country} onChange={(e) => handleCountrySelect(e)} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'>
+                        {countries.map((option, key) => (
+                        <option key = {key} value={option.iso2}>{option.name}</option>
+                        ))}
 
-                    <input 
-                        type="text"
-                        className="block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform"
-                        name="city"
-                        placeholder="Ville" 
-                        onChange={(e) => setCity(e.target.value)}
-                        value={city}
-                        required/>
+                    </select>
+                    </div>
+
+                    <div> 
+                    <select defaultValue = {city} onChange={(e) => setCity(e.target.value)} className='block border border-grey-light w-full p-3 rounded mb-4 textzone1 inputform'>
+
+                       {cityData[0].cities.map((option, key) => (
+                        <option key = {key} value={option}>{option}</option>
+                        ))}
+
+                    </select>
+                    </div>
 
                     <input 
                         type="text"
@@ -123,7 +135,6 @@ console.log(user);
                     <button
                         type="submit"
                         className="w-full text-center py-3 rounded my-1 btn1"
-                        onClick={(e) => handleSignup()}
 
                     >S&apos;inscrire</button>
 
